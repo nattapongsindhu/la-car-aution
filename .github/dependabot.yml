@@ -7,6 +7,13 @@ updates:
       day: "monday"
       time: "08:00"
     open-pull-requests-limit: 5
+    ignore:
+      # Tailwind v4 is a breaking change (PostCSS plugin moved package). Stay on v3.
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
+      # postcss v9+ may conflict with overrides — stay on v8.
+      - dependency-name: "postcss"
+        update-types: ["version-update:semver-major"]
     groups:
       nextjs-stack:
         patterns:
