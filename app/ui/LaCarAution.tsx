@@ -237,13 +237,13 @@ export default function LaCarAution() {
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-100 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
                 <Database size={16} />
-                LA Car Aution
+                LA Car Auctions
               </div>
               <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
-                LA Car Aution
+                LA Car Auctions
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400">
-                Official LA Car Aution Platform
+                Official LA Car Auctions Platform
               </p>
               <a
                 href="http://opgla.com/Auctions"

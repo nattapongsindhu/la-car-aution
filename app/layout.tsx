@@ -3,8 +3,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "LA Car Aution",
-  description: "Official LA Car Aution Platform",
+  title: "LA Car Auctions",
+  description: "Official LA Car Auctions Platform",
 };
 
 export default function RootLayout({
