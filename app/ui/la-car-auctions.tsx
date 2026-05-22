@@ -42,6 +42,14 @@ function googleImageLink(vin: string) {
   return `https://www.google.com/search?q=${query}&tbm=isch`;
 }
 
+function shortDivision(div: string): string {
+  return (
+    div
+      .replace(/[,\s]*(towing\s*(inc\.?|llc\.?)?|tow\s+service[,\s]*(inc\.?|llc\.?)?)$/i, "")
+      .trim() || div
+  );
+}
+
 
 export default function LaCarAution() {
   const [activeTab, setActiveTab] = useState<TabId>("dashboard");
@@ -546,11 +554,11 @@ function VehicleScraperTab({
       </div>
 
       {/* Vehicle Table */}
-      <div className="mt-8 overflow-x-auto rounded-3xl border border-slate-100 dark:border-slate-800">
-        <table className="w-full min-w-[1380px] border-collapse text-left text-sm">
-          <thead className="bg-slate-50 text-xs uppercase tracking-[0.18em] text-slate-400 dark:bg-slate-950">
+      <div className="mt-8 rounded-3xl border border-slate-100 dark:border-slate-800">
+        <table className="w-full table-auto border-collapse text-left text-xs">
+          <thead className="bg-slate-50 text-[10px] uppercase tracking-wider text-slate-400 dark:bg-slate-950">
             <tr>
-              <th className="px-6 py-5 font-black">
+              <th className="px-3 py-3 font-black">
                 <SortHeader
                   active={sortKey === "year"}
                   direction={sortDirection}
@@ -558,9 +566,9 @@ function VehicleScraperTab({
                   onClick={() => handleSort("year")}
                 />
               </th>
-              <th className="px-6 py-5 font-black">Risk</th>
-              <th className="px-6 py-5 font-black">Est. DMV Fee</th>
-              <th className="px-6 py-5 font-black">
+              <th className="px-3 py-3 font-black">Risk</th>
+              <th className="px-3 py-3 font-black">DMV Fee</th>
+              <th className="px-3 py-3 font-black">
                 <SortHeader
                   active={sortKey === "make"}
                   direction={sortDirection}
@@ -568,7 +576,7 @@ function VehicleScraperTab({
                   onClick={() => handleSort("make")}
                 />
               </th>
-              <th className="px-6 py-5 font-black">
+              <th className="px-3 py-3 font-black">
                 <SortHeader
                   active={sortKey === "model"}
                   direction={sortDirection}
@@ -576,17 +584,17 @@ function VehicleScraperTab({
                   onClick={() => handleSort("model")}
                 />
               </th>
-              <th className="px-6 py-5 font-black">VIN</th>
-              <th className="px-6 py-5 font-black">OPG Division</th>
-              <th className="px-6 py-5 font-black">Actions</th>
+              <th className="px-3 py-3 font-black">VIN</th>
+              <th className="px-3 py-3 font-black">Division</th>
+              <th className="px-3 py-3 font-black">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {isLoadingVehicles &&
               Array.from({ length: 5 }).map((_, i) => (
                 <tr key={i} className="animate-pulse">
-                  <td className="px-6 py-5" colSpan={8}>
-                    <div className="h-10 rounded-2xl bg-slate-100 dark:bg-slate-800" />
+                  <td className="px-3 py-3" colSpan={8}>
+                    <div className="h-7 rounded-xl bg-slate-100 dark:bg-slate-800" />
                   </td>
                 </tr>
               ))}
@@ -602,41 +610,45 @@ function VehicleScraperTab({
                       : "font-bold text-slate-600 dark:text-slate-300";
                 return (
                   <tr key={vehicle.vin} className="align-middle">
-                    <td className="px-6 py-5 font-black">{vehicle.year || "N/A"}</td>
-                    <td className="px-6 py-5">
+                    <td className="px-3 py-3 font-black">{vehicle.year || "N/A"}</td>
+                    <td className="px-3 py-3">
                       <RiskBadge risk={risk} />
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-3 py-3">
                       <span className={feeClass}>${risk.dmvFee.toLocaleString()}</span>
                     </td>
-                    <td className="px-6 py-5 font-bold">{vehicle.make}</td>
-                    <td className="px-6 py-5 text-slate-600 dark:text-slate-300">
+                    <td className="px-3 py-3 font-bold">{vehicle.make}</td>
+                    <td className="px-3 py-3 text-slate-600 dark:text-slate-300">
                       {vehicle.model}
                     </td>
-                    <td className="px-6 py-5 font-mono text-xs font-bold text-slate-500">
+                    <td className="px-3 py-3 font-mono font-bold text-slate-500">
                       {vehicle.vin}
                     </td>
-                    <td className="px-6 py-5">
-                      <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-black text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                        {vehicle.division}
-                      </span>
+                    <td className="px-3 py-3 text-slate-600 dark:text-slate-300">
+                      {shortDivision(vehicle.division)}
                     </td>
-                    <td className="px-6 py-5">
-                      <div className="flex items-center gap-2">
+                    <td className="px-3 py-3">
+                      <div className="flex items-center gap-1">
                         <button
                           onClick={() => handleCheckDmv(vehicle.vin)}
-                          className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white transition hover:bg-blue-700"
+                          className="rounded bg-blue-600 px-1.5 py-0.5 text-[10px] font-black text-white transition hover:bg-blue-700"
                         >
-                          {copiedVin === vehicle.vin ? "VIN Copied! 📋" : "Check DMV"}
-                          {copiedVin !== vehicle.vin && <ArrowUpRight size={14} />}
+                          {copiedVin === vehicle.vin ? "✓" : "DMV"}
                         </button>
                         <button
                           onClick={() => handleCheckMiles(vehicle.vin)}
-                          className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-xs font-black text-white transition hover:bg-orange-600"
+                          className="rounded bg-orange-500 px-1.5 py-0.5 text-[10px] font-black text-white transition hover:bg-orange-600"
                         >
-                          Check Miles
-                          <ArrowUpRight size={14} />
+                          Miles
                         </button>
+                        <a
+                          href={googleImageLink(vehicle.vin)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded bg-slate-500 px-1.5 py-0.5 text-[10px] font-black text-white transition hover:bg-slate-600"
+                        >
+                          Google
+                        </a>
                       </div>
                     </td>
                   </tr>
@@ -672,7 +684,7 @@ function RiskBadge({ risk }: { risk: RiskResult }) {
         title={`Low-Fee Everyday Driver ($${risk.dmvFee.toLocaleString()})`}
       >
         <ShieldCheck size={12} />
-        CLEAN CANDIDATE
+        CLEAN
       </span>
     );
   }
@@ -683,7 +695,7 @@ function RiskBadge({ risk }: { risk: RiskResult }) {
         title={`Flagged due to Age, Euro Make, or High Fees ($${risk.dmvFee.toLocaleString()})`}
       >
         <ShieldAlert size={12} />
-        HIGH RISK: EXCEEDS LIMITS
+        HIGH RISK
       </span>
     );
   }
@@ -693,7 +705,7 @@ function RiskBadge({ risk }: { risk: RiskResult }) {
       title={`Review history normally ($${risk.dmvFee.toLocaleString()})`}
     >
       <Shield size={12} />
-      STANDARD INSPECTION
+      STANDARD
     </span>
   );
 }
@@ -713,7 +725,7 @@ function SortHeader({
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-slate-400 transition hover:text-blue-600 dark:hover:text-blue-300"
+      className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-slate-400 transition hover:text-blue-600 dark:hover:text-blue-300"
     >
       {label}
       <span className={active ? "text-blue-600 dark:text-blue-300" : "text-slate-300"}>
