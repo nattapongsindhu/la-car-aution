@@ -106,7 +106,11 @@ function assessRisk(vehicle: Vehicle): RiskResult {
 }
 
 function parseOpgHtmlTable(source: string): Vehicle[] {
-  const doc = new DOMParser().parseFromString(source, "text/html");
+  const normalized = source.trim();
+  const wrapped = /<table[\s>]/i.test(normalized)
+    ? normalized
+    : `<table>${normalized}</table>`;
+  const doc = new DOMParser().parseFromString(wrapped, "text/html");
   const rows = Array.from(doc.querySelectorAll("tr"));
   const vehicles = new Map<string, Vehicle>();
 
