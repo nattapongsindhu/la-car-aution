@@ -27,14 +27,14 @@
     "postcss": "$postcss"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.9.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
     "postcss": "^8.5.15",
     "prettier": "^3.8.3",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
   }
 }
