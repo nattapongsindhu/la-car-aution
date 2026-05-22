@@ -347,6 +347,15 @@ function VehicleScraperTab({
     window.open("https://www.dmv.ca.gov/wasapp/FeeCalculatorWeb/usedVehicleForm.do", "_blank", "noopener,noreferrer");
   }
 
+  async function handleCheckMiles(vin: string) {
+    try {
+      await navigator.clipboard.writeText(vin);
+    } catch {
+      // clipboard blocked — still open iSeeCars tab
+    }
+    window.open(`https://www.iseecars.com/vin-report?vin=${vin}`, "_blank", "noopener,noreferrer");
+  }
+
   const years = useMemo(
     () =>
       Array.from(new Set(vehicles.map((v) => v.year).filter(Boolean)))
@@ -538,7 +547,7 @@ function VehicleScraperTab({
 
       {/* Vehicle Table */}
       <div className="mt-8 overflow-x-auto rounded-3xl border border-slate-100 dark:border-slate-800">
-        <table className="w-full min-w-[1200px] border-collapse text-left text-sm">
+        <table className="w-full min-w-[1380px] border-collapse text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-[0.18em] text-slate-400 dark:bg-slate-950">
             <tr>
               <th className="px-6 py-5 font-black">
@@ -613,13 +622,20 @@ function VehicleScraperTab({
                       </span>
                     </td>
                     <td className="px-6 py-5">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleCheckDmv(vehicle.vin)}
                           className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white transition hover:bg-blue-700"
                         >
                           {copiedVin === vehicle.vin ? "VIN Copied! 📋" : "Check DMV"}
                           {copiedVin !== vehicle.vin && <ArrowUpRight size={14} />}
+                        </button>
+                        <button
+                          onClick={() => handleCheckMiles(vehicle.vin)}
+                          className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-xs font-black text-white transition hover:bg-orange-600"
+                        >
+                          Check Miles
+                          <ArrowUpRight size={14} />
                         </button>
                       </div>
                     </td>
@@ -883,6 +899,15 @@ function WatchlistTab({ vehicles }: { vehicles: Vehicle[] }) {
     window.open("https://www.dmv.ca.gov/wasapp/FeeCalculatorWeb/usedVehicleForm.do", "_blank", "noopener,noreferrer");
   }
 
+  async function handleCheckMiles(vin: string) {
+    try {
+      await navigator.clipboard.writeText(vin);
+    } catch {
+      // clipboard blocked — still open iSeeCars tab
+    }
+    window.open(`https://www.iseecars.com/vin-report?vin=${vin}`, "_blank", "noopener,noreferrer");
+  }
+
   const watched = useMemo(
     () => vehicles.filter((v) => assessRisk(v).status === "clean").slice(0, 3),
     [vehicles],
@@ -938,13 +963,22 @@ function WatchlistTab({ vehicles }: { vehicles: Vehicle[] }) {
               </span>
             </div>
           </div>
-          <button
-            onClick={() => handleCheckDmv(vehicle.vin)}
-            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 py-3 text-xs font-black text-white transition hover:bg-blue-700"
-          >
-            {copiedVin === vehicle.vin ? "VIN Copied! 📋" : "Check DMV"}
-            {copiedVin !== vehicle.vin && <ArrowUpRight size={14} />}
-          </button>
+          <div className="mt-6 grid grid-cols-2 gap-2">
+            <button
+              onClick={() => handleCheckDmv(vehicle.vin)}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 py-3 text-xs font-black text-white transition hover:bg-blue-700"
+            >
+              {copiedVin === vehicle.vin ? "VIN Copied! 📋" : "Check DMV"}
+              {copiedVin !== vehicle.vin && <ArrowUpRight size={14} />}
+            </button>
+            <button
+              onClick={() => handleCheckMiles(vehicle.vin)}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-orange-500 py-3 text-xs font-black text-white transition hover:bg-orange-600"
+            >
+              Check Miles
+              <ArrowUpRight size={14} />
+            </button>
+          </div>
         </article>
       ))}
     </section>
