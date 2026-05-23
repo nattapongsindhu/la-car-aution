@@ -72,6 +72,8 @@ const MAKE_ABBREVIATIONS: Record<string, string> = {
   SUZU: "Suzuki",
   LNDR: "Land Rover",
   ROVR: "Land Rover",
+  SAA: "Saab",
+  YAMA: "Yamaha",
 };
 
 function getFullMakeName(make: string): string {
@@ -143,6 +145,35 @@ const MODEL_ABBREVIATIONS: Record<string, string> = {
   TUC: "Tucson",
   OPT: "Optima",
   SOR: "Sorento",
+  // Chevrolet
+  CRZ: "Cruze",
+  TRV: "Traverse",
+  // GMC
+  TRN: "Terrain",
+  // Ford
+  FIE: "Fiesta",
+  // Hyundai
+  ELN: "Elantra",
+  // Dodge / Chrysler
+  CVN: "Caravan",
+  DAR: "Dart",
+  // Nissan
+  LEF: "Leaf",
+  RGE: "Rogue",
+  VRS: "Versa",
+  // Subaru
+  LEG: "Legacy",
+  // Toyota
+  SOL: "Solara",
+  AVA: "Avalon",
+  // Mitsubishi
+  LAN: "Lancer",
+  // Volkswagen
+  GOL: "Golf",
+  // BMW
+  "28I": "3-Series 28i",
+  // Yamaha / Motorcycle
+  CYL: "Motorcycle",
   // Unknown / blank
   UNKN: "",
   UNK: "",
