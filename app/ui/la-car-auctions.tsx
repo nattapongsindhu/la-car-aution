@@ -42,9 +42,43 @@ function googleImageLink(vin: string) {
   return `https://www.google.com/search?q=${query}&tbm=isch`;
 }
 
-function photoSearchLink(year: number, make: string, vin: string) {
-  const q = encodeURIComponent(`${year} ${make} ${vin}`);
-  return `https://www.google.com/search?tbm=isch&q=${q}`;
+const MAKE_ABBREVIATIONS: Record<string, string> = {
+  TOYT: "Toyota",
+  HOND: "Honda",
+  CHEV: "Chevrolet",
+  NISS: "Nissan",
+  MAZD: "Mazda",
+  DODG: "Dodge",
+  HYUN: "Hyundai",
+  LEXS: "Lexus",
+  ACUR: "Acura",
+  INFI: "Infiniti",
+  INFINI: "Infiniti",
+  TESL: "Tesla",
+  MERZ: "Mercedes-Benz",
+  MERC: "Mercedes-Benz",
+  VOLK: "Volkswagen",
+  JAGU: "Jaguar",
+  LAND: "Land Rover",
+  SUBA: "Subaru",
+  MITS: "Mitsubishi",
+  BUIC: "Buick",
+  CADI: "Cadillac",
+  LINC: "Lincoln",
+  CHRY: "Chrysler",
+  PONT: "Pontiac",
+  PORS: "Porsche",
+  VOLV: "Volvo",
+};
+
+function getFullMakeName(make: string): string {
+  const upper = make.toUpperCase().trim();
+  return MAKE_ABBREVIATIONS[upper] ?? make;
+}
+
+function photoSearchLink(make: string, model: string, vin: string) {
+  const q = encodeURIComponent(`${getFullMakeName(make)} ${model} ${vin}`);
+  return `https://www.google.com/search?q=${q}`;
 }
 
 function shortDivision(div: string): string {
@@ -649,10 +683,10 @@ function VehicleScraperTab({
                           Miles
                         </button>
                         <a
-                          href={photoSearchLink(vehicle.year, vehicle.make, vehicle.vin)}
+                          href={photoSearchLink(vehicle.make, vehicle.model, vehicle.vin)}
                           target="_blank"
                           rel="noreferrer"
-                          className="rounded bg-indigo-600 px-1.5 py-0.5 text-[10px] font-black text-white transition hover:bg-indigo-700"
+                          className="rounded bg-yellow-500 px-1.5 py-0.5 text-[10px] font-black text-slate-900 transition hover:bg-yellow-600"
                         >
                           Photos
                         </a>
@@ -996,10 +1030,10 @@ function WatchlistTab({ vehicles }: { vehicles: Vehicle[] }) {
               Miles
             </button>
             <a
-              href={photoSearchLink(vehicle.year, vehicle.make, vehicle.vin)}
+              href={photoSearchLink(vehicle.make, vehicle.model, vehicle.vin)}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-1 rounded-2xl bg-indigo-600 py-3 text-xs font-black text-white transition hover:bg-indigo-700"
+              className="inline-flex items-center justify-center gap-1 rounded-2xl bg-yellow-500 py-3 text-xs font-black text-slate-900 transition hover:bg-yellow-600"
             >
               Photos
             </a>
