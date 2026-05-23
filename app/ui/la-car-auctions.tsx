@@ -174,6 +174,7 @@ const MODEL_ABBREVIATIONS: Record<string, string> = {
   CPR: "Cooper",
   // Volkswagen
   GOL: "Golf",
+  CAB: "Cabriolet",
   // BMW
   "28I": "3-Series 28i",
   // Yamaha / Motorcycle
@@ -181,6 +182,9 @@ const MODEL_ABBREVIATIONS: Record<string, string> = {
   // Chevrolet extras
   CLD: "Colorado",
   VAN: "Express Van",
+  AST: "Astro",
+  // Jeep
+  CHK: "Cherokee",
   // Dodge extras
   AVN: "Avenger",
   SPI: "Sprinter",
@@ -190,6 +194,8 @@ const MODEL_ABBREVIATIONS: Record<string, string> = {
   F45: "F-450",
   FSY: "Freestar",
   EPD: "Escape",
+  TAU: "Taurus",
+  EC3: "Econoline Club Wagon",
   // Toyota extras
   PRE: "Previa",
   COA: "Corolla",
