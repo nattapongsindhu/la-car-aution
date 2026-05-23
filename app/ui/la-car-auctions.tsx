@@ -25,7 +25,7 @@ import { assessRisk, computeDmvFee } from "../../lib/risk";
 import { parseOpgData } from "../../lib/parsers";
 import { loadVehicles, saveVehicles } from "../../lib/storage/vehicleStore";
 
-type TabId = "dashboard" | "scraper" | "history" | "dmv" | "watchlist";
+type TabId = "dashboard" | "scraper" | "history" | "dmv" | "watchlist" | "locations";
 
 const tabs: Array<{ id: TabId; label: string }> = [
   { id: "dashboard", label: "Dashboard" },
@@ -33,6 +33,24 @@ const tabs: Array<{ id: TabId; label: string }> = [
   { id: "history", label: "VIN History" },
   { id: "dmv", label: "DMV Calculator" },
   { id: "watchlist", label: "Watchlist" },
+  { id: "locations", label: "Locations" },
+];
+
+const policeGarages = [
+  { name: "Hollywood Tow Service, Inc.", address: "1015 N Mansfield Ave, Los Angeles, CA 90038" },
+  { name: "Viertel's Central Division", address: "500 N Center St, Los Angeles, CA 90012" },
+  { name: "S & J Wilshire Tow", address: "2400 W Washington Blvd, Los Angeles, CA 90018" },
+  { name: "Viertel's Rampart Division", address: "2110 S. Burlington Ave, Los Angeles, CA 90007" },
+  { name: "Viertels - Northeast Tow", address: "2010 N Figueroa St, Los Angeles, CA 90065" },
+  { name: "Absolute Towing - Hollenbeck Division", address: "4760 Valley Blvd, Los Angeles, CA 90032" },
+  { name: "AL's Towing", address: "1919 W Gage Ave, Los Angeles, CA 90047" },
+  { name: "U.S. Tow Inc", address: "2119 E 25th St, Los Angeles, CA 90058" },
+  { name: "Bruffy's Del Rey Tow", address: "11101 S Hindry Ave, Los Angeles, CA 90045" },
+  { name: "Kelmark Tow", address: "620 E 111th Pl, Los Angeles, CA 90059" },
+  { name: "Keystone Towing", address: "7817 Woodley Ave, Van Nuys, CA 91406" },
+  { name: "Black & White Towing", address: "10857 San Fernando Road, Pacoima, CA 91331" },
+  { name: "Ross Baker Towing", address: "8750 Vanalden Ave, Northridge, CA 91324" },
+  { name: "Jon's Towing Inc.", address: "25859 W. Rye Canyon Rd, Valencia, CA 91355" },
 ];
 
 const volumePoints = [78, 92, 88, 111, 126, 119, 142, 154];
@@ -371,6 +389,7 @@ export default function LaCarAution() {
           />
         )}
         {activeTab === "watchlist" && <WatchlistTab vehicles={vehicles} />}
+        {activeTab === "locations" && <LocationsTab />}
       </div>
     </main>
   );
@@ -1190,6 +1209,61 @@ function FeeRow({ label, value }: { label: string; value: number }) {
       <span className="font-bold text-slate-500 dark:text-slate-400">{label}</span>
       <span className="font-black">${value.toFixed(2)}</span>
     </div>
+  );
+}
+
+function LocationsTab() {
+  function handleViewMap(address: string) {
+    const query = encodeURIComponent(address);
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  }
+
+  return (
+    <section className="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+      <div className="mb-6 flex flex-col gap-2">
+        <h2 className="text-2xl font-black">Official Police Garages</h2>
+        <p className="max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400">
+          Reference list for OPG auction pickup locations.
+        </p>
+      </div>
+
+      <div className="rounded-3xl border border-slate-100 dark:border-slate-800">
+        <table className="w-full table-auto border-collapse text-left text-xs">
+          <thead className="bg-slate-50 text-[10px] uppercase tracking-wider text-slate-400 dark:bg-slate-950">
+            <tr>
+              <th className="px-3 py-3 font-black">No.</th>
+              <th className="px-3 py-3 font-black">Name</th>
+              <th className="px-3 py-3 font-black">Address</th>
+              <th className="px-3 py-3 font-black">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            {policeGarages.map((garage, index) => (
+              <tr key={garage.address} className="align-middle">
+                <td className="px-3 py-3 text-slate-400">{index + 1}</td>
+                <td className="px-3 py-3 font-bold">{garage.name}</td>
+                <td className="px-3 py-3 text-slate-600 dark:text-slate-300">
+                  {garage.address}
+                </td>
+                <td className="px-3 py-3">
+                  <button
+                    type="button"
+                    onClick={() => handleViewMap(garage.address)}
+                    className="rounded bg-blue-600 px-1.5 py-0.5 text-[10px] font-black text-white transition hover:bg-blue-700"
+                  >
+                    View Map ↗
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }
 
