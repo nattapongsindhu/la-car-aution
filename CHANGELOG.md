@@ -8,9 +8,6 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-### Added
-- CHANGELOG.md (this file)
-
 ---
 
 ## [0.1.0] — 2026-05-22
@@ -25,6 +22,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - DMV Calculator tab
 - Risk summary strip (Clean / Standard / High Risk counts above table)
 - Make & model abbreviation dictionaries (MAKE_ABBREVIATIONS, MODEL_ABBREVIATIONS) covering 100+ LAPD/OPG police codes
+- CHANGELOG.md (this file)
 - Full make and model names rendered in table and watchlist (resolves TOYT → Toyota, HOND → Honda, etc.)
 - Make filter dropdown with full names, deduplicated by resolved name
 - Micro action badges: [DMV], [Miles] (iSeeCars), [Photos] (Google Images)
