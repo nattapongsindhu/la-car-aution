@@ -852,7 +852,7 @@ function RiskBadge({ risk }: { risk: RiskResult }) {
   if (risk.status === "clean") {
     return (
       <span
-        className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-black text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300"
+        className="inline-flex items-center gap-1.5 rounded-full border border-green-300 bg-green-100 px-3 py-1.5 text-xs font-black text-green-900 dark:border-green-500/40 dark:bg-green-500/10 dark:text-green-300"
         title={`Low-Fee Everyday Driver ($${risk.dmvFee.toLocaleString()})`}
       >
         <ShieldCheck size={12} />
@@ -863,7 +863,7 @@ function RiskBadge({ risk }: { risk: RiskResult }) {
   if (risk.status === "high") {
     return (
       <span
-        className="inline-flex items-center gap-1.5 rounded-full bg-rose-100 px-3 py-1.5 text-xs font-black text-rose-700 dark:bg-rose-500/20 dark:text-rose-300"
+        className="inline-flex items-center gap-1.5 rounded-full border border-red-300 bg-red-100 px-3 py-1.5 text-xs font-black text-red-900 dark:border-red-500/40 dark:bg-red-500/10 dark:text-red-300"
         title={`Flagged due to Age, Euro Make, or High Fees ($${risk.dmvFee.toLocaleString()})`}
       >
         <ShieldAlert size={12} />
@@ -873,7 +873,7 @@ function RiskBadge({ risk }: { risk: RiskResult }) {
   }
   return (
     <span
-      className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-black text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+      className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-100 px-3 py-1.5 text-xs font-black text-slate-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200"
       title={`Review history normally ($${risk.dmvFee.toLocaleString()})`}
     >
       <Shield size={12} />
