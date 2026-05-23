@@ -74,6 +74,7 @@ const MAKE_ABBREVIATIONS: Record<string, string> = {
   ROVR: "Land Rover",
   SAA: "Saab",
   YAMA: "Yamaha",
+  MNNI: "Mini",
 };
 
 function getFullMakeName(make: string): string {
@@ -168,6 +169,8 @@ const MODEL_ABBREVIATIONS: Record<string, string> = {
   AVA: "Avalon",
   // Mitsubishi
   LAN: "Lancer",
+  // Mini
+  CPR: "Cooper",
   // Volkswagen
   GOL: "Golf",
   // BMW
