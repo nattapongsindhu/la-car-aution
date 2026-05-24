@@ -100,8 +100,8 @@ const policeGarages = [
   {
     name: "Keystone Towing",
     address: "7817 Woodley Ave, Van Nuys, CA 91406",
-    day: "Thursday",
-    time: "7:30 PM",
+    day: "Wednesday",
+    time: "10:00 AM",
   },
   {
     name: "Black & White Towing",
@@ -112,8 +112,8 @@ const policeGarages = [
   {
     name: "Ross Baker Towing",
     address: "8750 Vanalden Ave, Northridge, CA 91324",
-    day: "Thursday",
-    time: "7:30 PM",
+    day: "Friday",
+    time: "10:00 AM",
   },
   {
     name: "Jon's Towing Inc.",
