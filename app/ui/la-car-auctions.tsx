@@ -40,72 +40,86 @@ const policeGarages = [
   {
     name: "Hollywood Tow Service, Inc.",
     address: "1015 N Mansfield Ave, Los Angeles, CA 90038",
-    schedule: "Every Thursday (Inspection: 8:00 AM / Auction: 9:00 AM)",
+    day: "Thursday",
+    time: "8:00 AM",
   },
   {
     name: "Viertel's Central Division",
     address: "500 N Center St, Los Angeles, CA 90012",
-    schedule: "Every Friday (Inspection: 9:00 AM / Auction: 10:00 AM)",
+    day: "Friday",
+    time: "9:00 AM",
   },
   {
     name: "S & J Wilshire Tow",
     address: "2400 W Washington Blvd, Los Angeles, CA 90018",
-    schedule: "Every Tuesday (Inspection: 10:00 AM / Auction: 11:00 AM)",
+    day: "Tuesday",
+    time: "10:00 AM",
   },
   {
     name: "Viertel's Rampart Division",
     address: "2110 S. Burlington Ave, Los Angeles, CA 90007",
-    schedule: "Every Wednesday (Inspection: 8:00 AM / Auction: 9:00 AM)",
+    day: "Wednesday",
+    time: "8:00 AM",
   },
   {
     name: "Viertels - Northeast Tow",
     address: "2010 N Figueroa St, Los Angeles, CA 90065",
-    schedule: "Every Tuesday (Inspection: 8:00 AM / Auction: 9:00 AM)",
+    day: "Tuesday",
+    time: "8:00 AM",
   },
   {
     name: "Absolute Towing - Hollenbeck Division",
     address: "4760 Valley Blvd, Los Angeles, CA 90032",
-    schedule: "Every Friday (Inspection: 8:00 AM / Auction: 9:00 AM)",
+    day: "Friday",
+    time: "8:00 AM",
   },
   {
     name: "AL's Towing",
     address: "1919 W Gage Ave, Los Angeles, CA 90047",
-    schedule: "Every Tuesday (Inspection: 8:30 AM / Auction: 9:30 AM)",
+    day: "Tuesday",
+    time: "8:30 AM",
   },
   {
     name: "U.S. Tow Inc",
     address: "2119 E 25th St, Los Angeles, CA 90058",
-    schedule: "Every Thursday (Inspection: 10:00 AM / Auction: 11:00 AM)",
+    day: "Thursday",
+    time: "10:00 AM",
   },
   {
     name: "Bruffy's Del Rey Tow",
     address: "11101 S Hindry Ave, Los Angeles, CA 90045",
-    schedule: "Every Wednesday (Inspection: 10:00 AM / Auction: 11:00 AM)",
+    day: "Wednesday",
+    time: "10:00 AM",
   },
   {
     name: "Kelmark Tow",
     address: "620 E 111th Pl, Los Angeles, CA 90059",
-    schedule: "Every Thursday (Inspection: 8:00 AM / Auction: 9:00 AM)",
+    day: "Thursday",
+    time: "8:00 AM",
   },
   {
     name: "Keystone Towing",
     address: "7817 Woodley Ave, Van Nuys, CA 91406",
-    schedule: "Every Wednesday (Inspection: 9:00 AM / Auction: 10:00 AM)",
+    day: "Wednesday",
+    time: "9:00 AM",
   },
   {
     name: "Black & White Towing",
     address: "10857 San Fernando Road, Pacoima, CA 91331",
-    schedule: "Every Tuesday (Inspection: 9:00 AM / Auction: 10:00 AM)",
+    day: "Tuesday",
+    time: "9:00 AM",
   },
   {
     name: "Ross Baker Towing",
     address: "8750 Vanalden Ave, Northridge, CA 91324",
-    schedule: "Every Friday (Inspection: 8:30 AM / Auction: 9:30 AM)",
+    day: "Friday",
+    time: "8:30 AM",
   },
   {
     name: "Jon's Towing Inc.",
     address: "25859 W. Rye Canyon Rd, Valencia, CA 91355",
-    schedule: "Every Wednesday (Inspection: 9:00 AM / Auction: 10:00 AM)",
+    day: "Wednesday",
+    time: "9:00 AM",
   },
 ];
 
@@ -1294,7 +1308,8 @@ function LocationsTab() {
               <th className="px-3 py-3 font-black">No.</th>
               <th className="px-3 py-3 font-black">Name</th>
               <th className="px-3 py-3 font-black">Address</th>
-              <th className="px-3 py-3 font-black">Auction Schedule</th>
+              <th className="px-3 py-3 font-black">Day</th>
+              <th className="px-3 py-3 font-black">Time</th>
               <th className="px-3 py-3 font-black">Actions</th>
             </tr>
           </thead>
@@ -1307,7 +1322,10 @@ function LocationsTab() {
                   {garage.address}
                 </td>
                 <td className="px-3 py-3 text-slate-600 dark:text-slate-300">
-                  {garage.schedule}
+                  {garage.day}
+                </td>
+                <td className="px-3 py-3 text-slate-600 dark:text-slate-300">
+                  {garage.time}
                 </td>
                 <td className="px-3 py-3">
                   <button
